@@ -52,4 +52,3 @@ function benchmark(fn, input, iterations = 1000) {
 benchmark(reverseArrayLoop, testArray);
 benchmark(reverseArraySpread, testArray);
 benchmark(reverseArrayMap, testArray);
-
