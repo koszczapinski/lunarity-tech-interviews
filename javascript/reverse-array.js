@@ -4,33 +4,52 @@ Create a function that reverses an array using three different methods
 
 // Method 1: Using spread operator and reverse() native method
 function reverseArraySpread(a) {
-  console.time('Spread Method');
   const result = [...a].reverse();
-  console.timeEnd('Spread Method');
   return result;
 }
 
 // Method 2: Using a loop
 function reverseArrayLoop(a) {
-  console.time('Loop Method');
   const reversed = [];
   for(let i = a.length - 1; i >= 0; i--) {
     reversed.push(a[i]);
   }
-  console.timeEnd('Loop Method');
   return reversed;
 }
 
 // Method 3: Using map()
 function reverseArrayMap(a) {
-  console.time('Map Method');
-  const result = a.map((_, index) => a[a.length - 1 - index]);
-  console.timeEnd('Map Method');
-  return result;
+  return a.map((_, index) => a[a.length - 1 - index]);
 }
 
 // Test cases
-const testArray = [1, 2, 3, 4];
-console.log('Spread method:', reverseArraySpread(testArray));
-console.log('Loop method:', reverseArrayLoop(testArray));
-console.log('Map method:', reverseArrayMap(testArray));
+const testArray = Array.from({length: 1000}, (_, i) => i);
+
+function benchmark(fn, input, iterations = 1000) {
+  const times = [];
+
+  for(let i = 0; i < iterations; i++) {
+      const start = performance.now();
+      fn(input);
+      const end = performance.now();
+      times.push(end - start);
+  }
+
+  const average = times.reduce((a, b) => a + b) / times.length;
+  const min = Math.min(...times);
+  const max = Math.max(...times);
+
+  console.log({
+    'Function': fn.name,
+    'Average Time': average.toFixed(4) + 'ms',
+    'Min Time': min.toFixed(4) + 'ms',
+    'Max Time': max.toFixed(4) + 'ms',
+    'Sample Size': iterations
+  });
+}
+
+// Usage:
+benchmark(reverseArrayLoop, testArray);
+benchmark(reverseArraySpread, testArray);
+benchmark(reverseArrayMap, testArray);
+
