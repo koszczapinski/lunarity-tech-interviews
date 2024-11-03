@@ -4,14 +4,13 @@ Create a function that reverses an array using three different methods
 
 // Method 1: Using spread operator and reverse() native method
 function reverseArraySpread(a) {
-  const result = [...a].reverse();
-  return result;
+  return [...a].reverse();
 }
 
 // Method 2: Using a loop
 function reverseArrayLoop(a) {
   const reversed = [];
-  for(let i = a.length - 1; i >= 0; i--) {
+  for (let i = a.length - 1; i >= 0; i--) {
     reversed.push(a[i]);
   }
   return reversed;
@@ -23,16 +22,18 @@ function reverseArrayMap(a) {
 }
 
 // Test cases
-const testArray = Array.from({length: 1000}, (_, i) => i);
+const testArray = Array.from({ length: 1000 }, (_, i) => i);
 
+// Benchmark function
+// TODO: move to separate file
 function benchmark(fn, input, iterations = 1000) {
   const times = [];
 
-  for(let i = 0; i < iterations; i++) {
-      const start = performance.now();
-      fn(input);
-      const end = performance.now();
-      times.push(end - start);
+  for (let i = 0; i < iterations; i++) {
+    const start = performance.now();
+    fn(input);
+    const end = performance.now();
+    times.push(end - start);
   }
 
   const average = times.reduce((a, b) => a + b) / times.length;
