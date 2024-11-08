@@ -27,4 +27,21 @@ function benchmark(fn, input, iterations = 1000) {
   });
 }
 
-export { benchmark };
+/**
+ * Generates an array of random numbers with potential duplicates
+ * @param {number} size - The desired size of the array
+ * @returns {number[]} Array of random integers between 0 and size/2
+ *
+ * The function creates an array of the specified size and fills it with random numbers.
+ * By using size/2 as the maximum value, we ensure there will likely be duplicate values,
+ * which is useful for testing deduplication functions.
+ */
+const generateTestArray = (size) => {
+  const arr = []; // Initialize empty array
+  for (let i = 0; i < size; i++) {
+    arr.push(Math.floor(Math.random() * (size / 2)));
+  }
+  return arr;
+};
+
+export { benchmark, generateTestArray };
