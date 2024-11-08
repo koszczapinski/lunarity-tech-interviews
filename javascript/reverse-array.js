@@ -1,3 +1,5 @@
+import { benchmark } from "./helpers.js";
+
 /*
 Create a function that reverses an array using three different methods
 */
@@ -23,31 +25,6 @@ function reverseArrayMap(a) {
 
 // Test cases
 const testArray = Array.from({ length: 1000 }, (_, i) => i);
-
-// Benchmark function
-// TODO: move to separate file
-function benchmark(fn, input, iterations = 1000) {
-  const times = [];
-
-  for (let i = 0; i < iterations; i++) {
-    const start = performance.now();
-    fn(input);
-    const end = performance.now();
-    times.push(end - start);
-  }
-
-  const average = times.reduce((a, b) => a + b) / times.length;
-  const min = Math.min(...times);
-  const max = Math.max(...times);
-
-  console.log({
-    'Function': fn.name,
-    'Average Time': average.toFixed(4) + 'ms',
-    'Min Time': min.toFixed(4) + 'ms',
-    'Max Time': max.toFixed(4) + 'ms',
-    'Sample Size': iterations
-  });
-}
 
 // Usage:
 benchmark(reverseArrayLoop, testArray);
