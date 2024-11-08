@@ -16,16 +16,27 @@
  * @param {number} target - Target sum to find
  * @return {number[]} - Array containing indices of the two numbers
  */
+
 function twoSum(nums, target) {
+  // Map to store numbers we've seen and their indices
   const numMap = new Map();
 
+  // Iterate through array once
   for (let i = 0; i < nums.length; i++) {
+    // Calculate the complement needed to reach target
     const complement = target - nums[i];
+
+    // If we've seen the complement before, we found a valid pair
     if (numMap.has(complement)) {
+      // Return indices of both numbers that sum to target
       return [numMap.get(complement), i]; // Return first pair found
     }
+
+    // Store current number and its index for future lookups
     numMap.set(nums[i], i); // Track index
   }
+
+  // Return empty array if no solution found (though problem guarantees a solution)
   return [];
 }
 
