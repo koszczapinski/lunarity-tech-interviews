@@ -3,7 +3,7 @@
  * Note: This method has limitations - cannot handle functions, undefined values,
  * or circular references
  */
-function deepClone(obj) {
+function deepCloneJSON(obj) {
   return JSON.parse(JSON.stringify(obj));
 }
 
@@ -43,7 +43,22 @@ const original = {
   name: "John",
   age: 30,
   hobbies: ["coding", "reading", "traveling"],
+  greet: function () {
+    console.log("Hello!");
+  },
+  someUndefined: undefined,
+  nested: {
+    func: () => "test",
+    undef: undefined,
+  },
 };
 
-const cloned = deepClone(original);
-console.log(cloned);
+const cloned = deepCloneJSON(original);
+console.log("Using JSON.parse/stringify:");
+console.log("Original:", original);
+console.log("Cloned:", cloned); // Functions and undefined values are lost
+
+console.log("Using custom deepClone function:");
+const cloned2 = deepClone(original);
+console.log("Original:", original);
+console.log("Cloned:", cloned2); // Functions and undefined values are preserved
