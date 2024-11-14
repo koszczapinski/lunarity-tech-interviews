@@ -1,22 +1,3 @@
-/**
- * LeetCode Two Sum Solution
- * Problem: Given an array of integers nums and an integer target,
- * return indices of the two numbers that add up to target.
- *
- * Key characteristics:
- * - Returns indices of the numbers (not the numbers themselves)
- * - Finds only the first valid pair
- * - Guarantees exactly one solution exists
- * - Cannot use the same element twice
- *
- * Time Complexity: O(n) - we only traverse the array once
- * Space Complexity: O(n) - we store at most n elements in the Map
- *
- * @param {number[]} nums - Array of integers
- * @param {number} target - Target sum to find
- * @return {number[]} - Array containing indices of the two numbers
- */
-
 function twoSum(nums, target) {
   // Map to store numbers we've seen and their indices
   const numMap = new Map();
@@ -40,6 +21,21 @@ function twoSum(nums, target) {
   return [];
 }
 
+function twoSumBruteForce(nums, target) {
+  // Check every possible pair of numbers
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i + 1; j < nums.length; j++) {
+      // If we find a pair that sums to target, return their indices
+      if (nums[i] + nums[j] === target) {
+        return [i, j];
+      }
+    }
+  }
+
+  // Return empty array if no solution found (though problem guarantees a solution)
+  return [];
+}
+
 // Test cases
 const nums = [2, 7, 11, 15];
 const target = 9;
@@ -52,3 +48,7 @@ console.log(twoSum(nums2, target2)); // Should output: [1, 2]
 const nums3 = [3, 3];
 const target3 = 6;
 console.log(twoSum(nums3, target3)); // Should output: [0, 1]
+
+console.log(twoSumBruteForce(nums, target)); // Should output: [0, 1]
+console.log(twoSumBruteForce(nums2, target2)); // Should output: [1, 2]
+console.log(twoSumBruteForce(nums3, target3)); // Should output: [0, 1]

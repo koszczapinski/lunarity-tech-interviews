@@ -1,60 +1,47 @@
-/**
- * Efficient solution using Map (Hash Map)
- * Time Complexity: O(n) - we only need to traverse the array once
- * Space Complexity: O(n) - we store at most n elements in the Map
- *
- * The algorithm works by keeping track of numbers we've seen and their frequencies.
- * For each number, we check if we've already seen its complement (targetSum - num)
- * that would sum to targetSum. If found, we add the frequency of that complement to our count.
- */
-function countPairsWithSum(arr, targetSum) {
-  let count = 0;
-  const seen = new Map(); // Stores number -> frequency mapping
+function twoSum(nums, target) {
+  const numMap = new Map();
+  let pairCount = 0; // Initialize counter
 
-  for (const num of arr) {
-    const complement = targetSum - num; // Calculate the number needed to sum to targetSum
+  for (let i = 0; i < nums.length; i++) {
+    const complement = target - nums[i];
 
-    // If we've seen the complement before, add its frequency to our count
-    // This handles cases where the same number can be used in multiple pairs
-    if (seen.has(complement)) {
-      count += seen.get(complement);
+    if (numMap.has(complement)) {
+      pairCount++; // Increment counter when we find a pair
     }
 
-    // Add current number to seen Map or increment its frequency if already exists
-    // The || 0 handles the case when the number is first encountered
-    seen.set(num, (seen.get(num) || 0) + 1);
+    numMap.set(nums[i], i);
   }
 
-  return count;
+  return pairCount; // Return the count instead of indices
 }
 
-/**
- * Brute force solution (not recommended)
- * Time Complexity: O(n²) - requires nested loops
- * Space Complexity: O(1) - only uses a counter variable
- *
- * This approach checks every possible pair of numbers in the array
- * by using nested loops. While simple to understand, it's inefficient
- * for large arrays.
- */
-function countPairsBruteForce(arr, targetSum) {
-  let count = 0;
+function countPairsWithSumBruteForce(nums, target) {
+  let pairCount = 0; // Initialize counter
 
-  for (let i = 0; i < arr.length; i++) {
-    for (let j = i + 1; j < arr.length; j++) {
-      // Check if current pair sums to targetSum
-      if (arr[i] + arr[j] === targetSum) {
-        count++;
+  for (let i = 0; i < nums.length; i++) {
+    for (let j = i + 1; j < nums.length; j++) {
+      if (nums[i] + nums[j] === target) {
+        pairCount++; // Increment counter when we find a pair
       }
     }
   }
 
-  return count;
+  return pairCount; // Return the count instead of indices
 }
 
-// Test cases
-const arr = [2, 4, 2, 6, 3, 1, 5, 3, 8, 4, 7];
+// Modified test cases
+const nums = [2, 7, 11, 15];
+const target = 9;
+console.log(twoSum(nums, target)); // Should output: 1
 
-// Test with target sum of 8
-console.log(countPairsWithSum(arr, 8)); // Should output: 4 (pairs: 1,7 | 3,5 | 3,5 | 2,6)
-console.log(countPairsBruteForce(arr, 8)); // Should output: 3 (pairs: 1,7 | 3,5 | 2,6)
+const nums2 = [3, 2, 4, 3];
+const target2 = 6;
+console.log(twoSum(nums2, target2)); // Should output: 2
+
+const nums3 = [3, 3, 3, 3];
+const target3 = 6;
+console.log(twoSum(nums3, target3)); // Should output: 6
+
+console.log(countPairsWithSumBruteForce(nums, target)); // Should output: 1
+console.log(countPairsWithSumBruteForce(nums2, target2)); // Should output: 2
+console.log(countPairsWithSumBruteForce(nums3, target3)); // Should output: 6
