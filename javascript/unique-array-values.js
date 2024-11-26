@@ -24,7 +24,7 @@ function uniqueWithObject(arr) {
   for (let i = 0; i < arr.length; i++) {
     obj[arr[i]] = true;
   }
-  return Object.keys(obj).map(Number);
+  return Object.keys(obj).map((num) => Number(num));
 }
 
 // Test the functions
