@@ -16,7 +16,7 @@ function twoSum(nums, target) {
 }
 
 function countPairsWithSumBruteForce(nums, target) {
-  let pairCount = 0; // Initialize counter
+  let pairCount = 0;
 
   for (let i = 0; i < nums.length; i++) {
     for (let j = i + 1; j < nums.length; j++) {

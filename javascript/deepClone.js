@@ -10,10 +10,8 @@ function deepCloneJSON(obj) {
 /**
  * Creates a deep clone of any JavaScript value
  * Handles primitive types, Dates, Arrays and Objects
- *
- * @param {*} obj - The value to clone
- * @returns {*} A deep clone of the input value
  */
+
 function deepClone(obj) {
   // Handle primitive types and null
   if (obj === null || typeof obj !== "object") {

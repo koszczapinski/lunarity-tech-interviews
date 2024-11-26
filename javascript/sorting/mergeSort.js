@@ -27,3 +27,5 @@ function merge(left, right) {
 }
 
 console.log(mergeSort([3, 6, 8, 10, 1, 2, 1]));
+
+// Time Complexity: O(n log n) - The array is divided in half log(n) times, and merging takes linear time O(n).

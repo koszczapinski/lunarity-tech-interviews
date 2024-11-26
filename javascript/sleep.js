@@ -13,4 +13,4 @@ const sleep = (fn, time) =>
   );
 
 // Example usage
-sleep(() => console.log('Hello'), 1000); // Logs 'Hello' after 1 second
+sleep(() => console.log("Hello"), 1000); // Logs 'Hello' after 1 second

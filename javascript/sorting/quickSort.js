@@ -11,9 +11,9 @@ function quickSort(arr) {
   const pivot = arr[Math.floor(arr.length / 2)];
 
   // Partition array into three parts:
-  const left = arr.filter(x => x < pivot);
-  const middle = arr.filter(x => x === pivot);
-  const right = arr.filter(x => x > pivot);
+  const left = arr.filter((x) => x < pivot);
+  const middle = arr.filter((x) => x === pivot);
+  const right = arr.filter((x) => x > pivot);
 
   // Recursively sort left and right partitions and combine with middle
   return [...quickSort(left), ...middle, ...quickSort(right)];
